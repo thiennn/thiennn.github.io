@@ -4,12 +4,9 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+My name is Nguyen Le Quynh Thien, or just call me Thien. Now I am working as an engineering manager at NashTech. In my free time, I run [simplcommerce](http://www.simplcommerce.com) an open source, super simple, cross platform and modularized ecommerce system built on .NET Core
 
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[nlqthien@gmail.com](mailto:nlqthien@gmail.com)
