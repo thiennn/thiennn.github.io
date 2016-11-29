@@ -1,6 +1,6 @@
 ---
 layout: post
-title:Dockerizing a real world asp.net core application
+title: Dockerizing a real world asp.net core application
 ---
 
 As you might know. I am developing an open source, cross platform and modularized ecommerce system built on .NET Core which I called [simplcommerce](https://github.com/simplcommerce/SimplCommerce). 
