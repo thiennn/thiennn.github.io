@@ -31,7 +31,7 @@ In the build setting, I check the option to make the build happen on pushes, and
 
 ![Automated build setting](/images/docker-automated-build_setting.png "Automated build setting")
 
-For the database, normally people will go with a separate container and may leverage docker compose to wire them together. But this is complicated to me :D. This is not for production so I want thing to be as simple as possible. I decided to bundle everything into one box. From the ubuntu, I installed postgres, then donetcore sdk, then nodejs. But I faced problems with staring postgres and its complidated permission mechanism. Yep! it is really complicated to a newbie as me. Getting stuck for a while. Then with using the postgres as the base image and doing more research, eventually I could make it work. You can see the dockerfile
+For the database, normally people will go with a separate container and may leverage docker compose to wire them together. But this is complicated to me :D. This is not for production so I want thing to be as simple as possible. I decided to bundle everything into one box. From the ubuntu, I installed postgres, then donetcore sdk, then nodejs. But I faced problems with staring postgres and its complidated permission mechanism. Yep! it is really complicated to a newbie as me. Getting stuck for a while. Then with using the postgres as the base image and doing more research, eventually I could make it work. The dockerfile
 {% gist 89eb9bccd086abaf9eb40bcf502afffb %}
 With postgres image, we can inject custom commands to run after the database started by putting *.sh or *.sql file in a directory called "docker-entrypoint-initdb.d". Basically the dockerfile will do the following steps:
 
@@ -44,11 +44,13 @@ With postgres image, we can inject custom commands to run after the database sta
  7. Build the all the .netcore project
  8. Install gulp and run "copy-modules" task to copy modules to the host
 
-After the containers started, and the postgres engine started. The file "[dockerinitcontainer.sh](https://github.com/simplcommerce/SimplCommerce/blob/docker/dockerinitcontainer.sh)" is called which will
+After the containers started, and the postgres engine started. The file "[dockerinitcontainer.sh]" is called which will
 
  1. Run entity framework migration
  2. Import some static data by using psql
  3. Finally start the app.
+ 
+ {% gist ec06d179a6a465c41ff84255fc430a96 %}
 
 Yeah, a real world dotnet app run perfectly on a docker container. One command to setup everything and here we go.
 
