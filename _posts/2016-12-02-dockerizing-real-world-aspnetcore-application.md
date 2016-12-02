@@ -13,7 +13,7 @@ title: Dockerizing a real world asp.net core application
  This is the second version of dockerizing simpcommerce. Read <a href="/dockerizing-real-world-aspnetcore-application-original">the first version</a> to have the full story
 </div>
 
-The day after [successful dockerizing simplcommerce](/dockerizing-real-world-aspnetcore-application-original/), I started to re-look at the approach, the code. I also received a bug report that the container fail to start again after stopping. 
+The day after [successfully dockerizing simplcommerce](/dockerizing-real-world-aspnetcore-application-original/), I started to re-look at the approach, the code. I also received a bug report that the container fail to start again after stopping. 
 The proudest thing of what I have done is that It only need one command to run the entire the application including the database in one container. But it revealed several drawbacks:
 
 -	The dockerfile is big, and it take long time to build. Around 15 minutes in dockerhub
