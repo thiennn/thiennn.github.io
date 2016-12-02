@@ -20,7 +20,7 @@ The proudest thing of what I have done is that it only need one command to run t
 -	Postgres has its own way to initialize the container. I have extended that process to do entity framework migration, import static data and call `dotnet run` to launch the website. But this process only run once, after the container started for the first time, so this is the root cause of the bug I have mentioned above
 -	Putting both the database and the website into one box generally is not a good practice.
 
-I have decided to make changes. The first thing I do is separating the database and the website. For the database I use the default images of (postgres)[https://hub.docker.com/_/postgres/] without any customization.
+I have decided to make changes. The first thing I do is separating the database and the website. For the database I use the default images of [postgres](https://hub.docker.com/_/postgres/) without any customization.
 
 **_“Separating what changes from what stays the same”_** is always a good practice. So it’s a good idea to separate the source code from the sdk. With this in mind I created [simpl-sdk](https://hub.docker.com/r/simplcommerce/simpl-sdk/) docker image. I need dotnet core 1.1 project json sdk, nodejs, gulp-cli and postgresql client. It make scene to start from microsoft/dotnet:1.1.0-sdk-projectjson then install other stuffs.
 
