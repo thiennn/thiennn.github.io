@@ -3,6 +3,8 @@ layout: post
 title: Dockerizing a real world asp.net core application
 ---
 
+[SimplCommerce nightly build on docker](https://hub.docker.com/r/simplcommerce/nightly-build/)
+
 <div class="alert alert-warning" role="alert">
  This is the second version of dockerizing simpcommerce. Read <a href="/dockerizing-real-world-aspnetcore-application-original/">the first version</a> to have the full story
 </div>
@@ -50,3 +52,25 @@ Something related to permission huh. Continue googling, then I was able to fix i
 `RUN chmod 755 /docker-entrypoint.sh` before the `ENTRYPOINT ["/docker-entrypoint.sh"]`
 
 ## Bonus - Some usefull psql commands
+Connect to a server run a query and print the out to a file
+`echo 'select count(*) from "Core_User";' | psql -h simpldb --username postgres -d simplcommerce -t > /tmp/varfile.txt`
+-h: host, -d: database, -t: to get just the tuple value
+
+Run an sql script
+`psql -h simpldb --username postgres -d simplcommerce -a -f /app/src/Database/StaticData_Postgres.sql'`
+-h: host, -d: database, -a: echo all queries from scripts, -f: file
+
+Connect to a server
+`psql -h simpldb --username postgres`
+
+### When connected
+`\l` : list all databases
+`\c dbname` : connect to dbname database
+
+### In a database
+`\i path.sql` : exe sql
+`\dt` : list table
+ `select * from "Core_User";` execute a query, the semicon at the end is required, table name is case sensitive
+
+### Quick psql
+`\q` : quick
