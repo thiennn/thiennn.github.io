@@ -4,7 +4,7 @@ title: Dockerizing a real world asp.net core application
 ---
 
 <div class="alert alert-warning" role="alert">
- This is the second version of dockerizing simpcommerce. Read the first version [here](/dockerizing-real-world-aspnetcore-application-original/) to have a full story
+ This is the second version of dockerizing simpcommerce. Read <a href="/dockerizing-real-world-aspnetcore-application-original/">the first version</a> to have the full story
 </div>
 
 The day after [successful dockerizing simplcommerce](/dockerizing-real-world-aspnetcore-application-original/), I started to re-look at the approach, the code and I also received a bug that the container fail to start again after stopping. 

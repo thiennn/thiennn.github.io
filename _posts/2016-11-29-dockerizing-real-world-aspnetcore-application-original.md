@@ -4,7 +4,7 @@ title: Dockerizing a real world asp.net core application, the original version
 ---
 
 <div class="alert alert-warning" role="alert">
- This is the original version of my dockerizing approach. Newer version [here](/dockerizing-real-world-aspnetcore-application/)
+ This is the original version of my dockerizing approach. <a href="/dockerizing-real-world-aspnetcore-application/">The newer version</a>
 </div>
 
 One single command **`docker run -d -p 5000:5000 simplcommerce/nightly-build`**, waiting a couple of minutes for docker to pull the images and start the container. Then open your browser, type localhost:5000 and you got a shopping cart website written by aspnetcore up and running. Yahoo!!!!. In this blog post I will describe how I did it.
