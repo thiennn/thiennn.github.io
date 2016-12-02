@@ -4,58 +4,44 @@ title: Dockerizing a real world asp.net core application
 ---
 
 <div class="alert alert-warning" role="alert">
- Alert version 2 is comming ....
+ This is the second version of dockerizing simpcommerce. Read the first version [here](/dockerizing-real-world-aspnetcore-application-original/) to have a full story
 </div>
 
-One single command **`docker run -d -p 5000:5000 simplcommerce/nightly-build`**, waiting a couple of minutes for docker to pull the images and start the container. Then open your browser, type localhost:5000 and you got a shopping cart website written by aspnetcore up and running. Yahoo!!!!. In this blog post I will describe how I did it.
+The day after [successful dockerizing simplcommerce](/dockerizing-real-world-aspnetcore-application-original/), I started to re-look at the approach, the code and I also received a bug that the container fail to start again after stopping. 
+The proudest thing of my approach is only one command needed to run the entire the application including the database. But it also reveals several drawbacks:
 
-As you might know. I am developing an open source, cross platform and modularized ecommerce system built on .NET Core which called [simplcommerce](https://github.com/simplcommerce/SimplCommerce). 
+-	The dockerfile is big, and it take long time to build around 15 minutes in dockerhub
+-	Postgres has its own way to initialize the container. I have extended that process to do entity framework migration, import static data, and call dotnet run to launch the website. But process is only run one, on the first start of the container, so this is the root cause of the bug I have mentioned above
+-	Putting the database and the website into one box generally is not a good practice.
 
-![SimplCommerce](/images/simplscreenshot.png "SimplCommerce")
+I have decided to make change. The first thing I do is separate the database and the website. For the database I use the default images of postgres https://hub.docker.com/_/postgres/ without any customization
 
-The system now has basic features of an ecommerce like: manage catalog, shopping cart, orders, review products, manage pages etc. Generally, it is enought for simple stores. Recently, many people come to ask me questions: doesn't run on Linux? can I deploy them to a container?
-I think it's a good idea to have a docker image for simplcommerce. I started to think about it. Below are 2 things that I want to archive:
+“Separating what changes from what stays the same” always a good practice. So it’s a good idea separate the source code from the sdk. With this in mind I created the Dockerfile call simpl-sdk. I need dotnet:1.1.0-sdk-projectjson, nodejs, gulp-cli and postgresql client. So it make scenes to start from microsoft/dotnet:1.1.0-sdk-projectjson then install these stuff.
 
-- It should be as simple as possible to for anybody who want to try simplcommerce. We have a demo site [here](http://demo.simplcommerce.com), but it will be more interesting to have it run on local, especially in a docker container.
-- The image should be created automatically every time we make a change on the github repo.
+## simpl-sdk Dockerfile
 
-Fascinating! But, to be honest. I am new to docker and the Linux world, I have some general knowldege but no real experience. After reseaching for a while, reading many articles, tutorials about putting an asp.net core application to a docker container. But most of them are very basic, just a hello world application. So it took me a while to figure how to dockerizing simplcommerce. Last night, finally I dit it.
+{% gist 04746416ba08c697e4713b08ea3b7501 %}
+Create a github repository and go to docker hub create automated build repository similar to [the way I did for simpcommerce](/dockerizing-real-world-aspnetcore-application-original/)
 
-Basically, challenges that I need to resolve are:
+## SimplCommerce Dockerfile
+Then the Dockerfile for simpcommerce then become very small and clean. 
+{% gist f1fee8650e42e4ccba5f9a5f5b2ef20b %}
+From the simpl-sdk, copy the source code in, restore nugget packages, build entire the projects, call `gulp copy-modules` to copy the build output of modules to the host. Copy and set the entry point. 
 
- 1. How to automate this process?
- 2. How to deal with database? How to run entity framework migration? How to import some static data? (simplcommerce needs some data in the database before it start)
- 3. How to run a gulp task there. The simplcommerce are composed by modules and a gulp task need to be run to copy modules to the host.
 
-For the first challenge. In docker hub, I found that we can create "created automated build" from a github repository. Yeah, that's cool. So, just create one and then connect to simplcommerce github repository. 
+## The entry point
+{% gist bc6a688d733b3c3d743185ed45d3fde3 %}
+At this time the connection to database is ready run `dotnet ef database update` to run migration, and use psql connect to the database if no data found in database then import static data, then call `dotnet run` to start the app
 
-![Create automated build](/images/docker-automated-build.png "Create automated build")
+Look simple and straight forward huh. But it took me a lot of time to make it run smoothly. First I don’t familiar with writing a shell script, I am a windows guy. Second, also not familiar with psql. Third some weird difference between linux and windows.
+The first error I got when rum the images was 
+“panic: standard_init_linux.go:175: exec user process caused "no such file or directory" [recovered]
+        panic: standard_init_linux.go:175: exec user process caused "no such file or directory” 
+What the hell is that? After some googling, I fixed by changing the line ending in the docker-entrypoint.sh from CRLF to LF. In Notepad++ select Edit -> EOL Conversion
 
-In the build setting, I check the option to make the build happen on pushes, and specify the location of the dockerfile.
+The second error is 
+“docker: Error response from daemon: invalid header field value "oci runtime error: container_linux.go:247: starting container process caused \"exec: \\\"/docker-entrypoint.sh\\\": permission denied\"\n".”
+Something related to permission huh. Continue googling, then able to fix by adding
+`RUN chmod 755 /docker-entrypoint.sh` before the `ENTRYPOINT ["/docker-entrypoint.sh"]`
 
-![Automated build setting](/images/docker-automated-build_setting.png "Automated build setting")
-
-For the database, normally people will go with a separate container and may leverage docker compose to wire them together. But this is complicated to me :D. This is not for production so I want thing to be as simple as possible. I decided to bundle everything into one box. From the ubuntu, I installed postgres, then donetcore sdk, then nodejs. But I faced problems with staring postgres and its complidated permission mechanism. Yep! it is really complicated to a newbie as me. Getting stuck for a while. Then with using the postgres as the base image and doing more research, eventually I could make it work. The dockerfile
-{% gist 89eb9bccd086abaf9eb40bcf502afffb %}
-With postgres image, we can inject custom commands to run after the database started by putting *.sh or *.sql file in a directory called "docker-entrypoint-initdb.d". Basically the dockerfile will do the following steps:
-
- 1. From postgres:9.5
- 2. Install some stuff that donetcore sdk and nodejs depend on
- 3. Install dotnetcore sdk
- 4. Install nodejs
- 5. Add custom commands to "docker-entrypoint-initdb.d" directory in the image. Here I use a shell script "dockerinitcontainer.sh"
- 6. Copy the simplcommerce source code to the image
- 7. Build the all the .netcore project
- 8. Install gulp and run "copy-modules" task to copy modules to the host
-
-After the containers started, and the postgres engine started. The file "[dockerinitcontainer.sh]" is called which will
-
- 1. Run entity framework migration
- 2. Import some static data by using psql
- 3. Finally start the app.
- 
- {% gist ec06d179a6a465c41ff84255fc430a96 %}
-
-Yeah, a real world dotnet app run perfectly on a docker container. One command to setup everything and here we go.
-
-This is my first baby step to docker and linux, It may be not perfect. So if you can give me suggestions, I will be more than happy.
+## Bonus - Some usefull psql commands
