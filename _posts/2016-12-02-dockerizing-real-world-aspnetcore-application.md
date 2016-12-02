@@ -3,12 +3,6 @@ layout: post
 title: Dockerizing a real world asp.net core application
 ---
 
-<p align="center">
-   <a href="https://hub.docker.com/r/simplcommerce/nightly-build" target="_blank">
-      <img src="/images/docker_simpl_s.png" alt="SimplCommerce on Docker" />
-   </a>
-<p>
-
 <div class="alert alert-warning">
  This is the second version of dockerizing simpcommerce. Read <a href="/dockerizing-real-world-aspnetcore-application-original">the first version</a> to have the full story
 </div>
