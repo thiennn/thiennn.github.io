@@ -1,4 +1,7 @@
-﻿# Modular Web Application with ASP.NET Core
+﻿---
+layout: post
+title: Modular Web Application with ASP.NET Core
+---
 
 Modularity is designing a system that is divided into a set of functional units (named modules) that can be composed into a larger application. These modules can be developed or maintained separately.
 
