@@ -1,4 +1,4 @@
-﻿---
+---
 layout: post
 title: Modular Web Application with ASP.NET Core
 ---
