@@ -120,6 +120,7 @@ services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddDefaultTokenProviders();
 ```
 ## The Migrations
+
 We will need to re-create entity framework migration classes. Delete add the file in folder "Data\Migrations" then go to the Package Manager Console type `Add-Migration CreateIdentitySchema`
 
 ## Bonus
