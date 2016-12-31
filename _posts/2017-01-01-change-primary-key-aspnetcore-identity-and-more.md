@@ -4,13 +4,13 @@ title: Change primary key for ASP.NET Core Identity and more
 ---
 
 By default ASP.NET Core Identity use a string value for the primary keys. In [SimplCommerce](https://github.com/simplcommerce/SimplCommerce) we decided to use a long value instead.
-We also changed the name of identity tables and run some custom code every time a user login in to the system. In this post I am going to show you how we did this.
+We also changed the name of identity tables and run some custom code every time a user login into the system. In this blog post I am going to show you how we did it.
 
 First, when creating new ASP.NET Core Web Application, in the ASP.NET Core template selecting dialog, choose "Web Application" then click on the "Change Authentication" button, then choose "Individual User Accounts"
 
 ![Create ASP.NET Core Project](/images/creating-aspnetcore-project.png "Create ASP.NET Core Project")
 
-## First the model
+## The model
 After the project has been created. Open the ApplicationUser.cs in the "Model" folder, you will see that it inherit from IdentityUser which then inherit from IdentityUser<string>. So we need to change that 
 
 ```cs
@@ -35,7 +35,7 @@ public class ApplicationUserRole : IdentityRole<long, ApplicationUserRole, Ident
 ```
 Actually you can name these classes whatever name you like. It doesn't matter
 
-## Second the DbContext
+## The DbContext
 We need to modify a little bit the inheritance of ApplicationDbContext. Instead of inherit from IdentityDbContext<ApplicationUser>, it should be
 
 ```cs
@@ -43,7 +43,7 @@ We need to modify a little bit the inheritance of ApplicationDbContext. Instead 
  
 ```
 
-## Third
+## UserStore and RoleStore
 Create our custom UserStore and RoleStore
 
 ```cs
@@ -108,7 +108,7 @@ public class ApplicationRoleStore : RoleStore<ApplicationRole, ApplicationDbCont
 }
 ```
 
-## Fourth the Startup.cs
+## The Startup.cs
 
 Change adding the EntityFrameworkStores to our ApplicationUserStore and ApplicationRoleStore that we just have created
 
@@ -118,8 +118,8 @@ services.AddIdentity<ApplicationUser, ApplicationRole>()
     .AddUserStore<ApplicationUserStore>()
     .AddDefaultTokenProviders();
 ```
-## Fifth re-create the EF Migration
-Delete add the file in folder "Data\Migrations" then go to the Package Manager Console type `Add-Migration CreateIdentitySchema`
+## Migrations
+We will need to re-create entity framework migration classes. Delete add the file in folder "Data\Migrations" then go to the Package Manager Console type `Add-Migration CreateIdentitySchema`
 
 ## Bonus
 
