@@ -163,6 +163,12 @@ namespace SimplCommerce.Module.Core.Extensions
 }
 ```
 
+Then register the SimplSignInManager in ConfigureServices method of Startup.cs
+
+```cs
+services.AddScoped<SignInManager<User>, SimplSignInManager<User>>();
+```
+
 ## The source code
 
 The source code of this post can be found here [https://github.com/thiennn/AspnetCoreIdentityLong](https://github.com/thiennn/AspnetCoreIdentityLong)
