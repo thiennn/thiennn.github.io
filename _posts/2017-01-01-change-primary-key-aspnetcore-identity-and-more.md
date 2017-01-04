@@ -24,7 +24,7 @@ public class ApplicationUser : IdentityUser<long>
 ```
 
 ## The DbContext
-We need to modify a little bit the inheritance of ApplicationDbContext. Instead of inheriting from IdentityDbContext<ApplicationUser>, it should be
+We need to modify a little bit the inheritance of ApplicationDbContext. Instead of inheriting from IdentityDbContext\<ApplicationUser>, it should be
 
 ```cs
  public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<long>, long>
