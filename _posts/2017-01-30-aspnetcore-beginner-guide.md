@@ -13,7 +13,7 @@ Although you might encounter some issues during the development because the tool
 
 ASP.NET Core is very different from the ASP.NET that you have already known. For example: there is no System.Web.dll, HTTP Modules, HTTP Handlers, Global.asax or Web.config. ASP.NET Core is a significant redesign of ASP.NET.
 
-The most important ASP.NET Core principle I think you have to to remember is the modularity. ASP.NET Core is a composition of granular NuGet packages and everything is excluded by default. That means you might need to add some packages when you need some features. And by this way you only take dependencies on the minimal set of packages you need.
+The most important ASP.NET Core principle I think you have to remember is the modularity. ASP.NET Core is a composition of granular NuGet packages and everything is excluded by default. That means you might need to add some packages when you need some features. And by this way you only take the minimal set of packages you need.
 
 # 1. What I need to install on my PC
 
@@ -28,7 +28,7 @@ Create an asp.net core project and take a quick look at the project structure an
 - [By Visual Studio](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc)
 - [By Command Line](https://docs.microsoft.com/en-us/aspnet/core/getting-started)
 
-# Learn core concepts
+# 3. Learn core concepts
 
 - [.NET Core fundamentals](https://docs.microsoft.com/en-us/dotnet/articles/core/index)
 
@@ -42,7 +42,8 @@ Create an asp.net core project and take a quick look at the project structure an
 
 - [TagHelper](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/tag-helpers/intro)
 
-# Follow tutorials
+# 4. Follow tutorials
+
  It is also a good idea to getting started by follow tutorials
  
 - [Getting started with ASP.NET Core and Entity Framework Core using Visual Studio](https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/)
@@ -51,7 +52,7 @@ Create an asp.net core project and take a quick look at the project structure an
 
 - [Free video courses](https://www.asp.net/freecourses)
 
-# More important concepts
+# 5. More important concepts
 
 - [.NET Standard](https://docs.microsoft.com/en-us/dotnet/articles/standard/library)
 
@@ -59,7 +60,7 @@ Create an asp.net core project and take a quick look at the project structure an
 
 - [NET Core command-line interface tools](https://docs.microsoft.com/en-us/dotnet/articles/core/tools/)
 
-# Reading code samples
+# 6. Reading code samples
 
 - [Entropy](https://github.com/aspnet/Entropy/tree/dev/samples)
 
