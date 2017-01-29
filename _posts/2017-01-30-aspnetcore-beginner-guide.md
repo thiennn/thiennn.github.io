@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ASP.NET Core - Beginner guide
+title: ASP.NET Core - A beginner guide
 ---
 
 In this post I assume that you are .NET developers. You have already known ASP.NET Webform or MVC and you want to learn ASP.NET Core.
