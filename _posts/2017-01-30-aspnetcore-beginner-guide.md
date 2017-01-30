@@ -3,7 +3,7 @@ layout: post
 title: ASP.NET Core - A beginner guide
 ---
 
-In this post I assume that you are .NET developers. You have already known ASP.NET Webform or MVC and you want to learn ASP.NET Core.
+In this post I assume that you are .NET developers or at least you have known C# and you want to learn ASP.NET Core. If you are new to .NET or you're coming from another language, I would recommend you to learn C# first. You can check out this nice tutorial to getting start with C# [here](https://www.microsoft.com/net/tutorials/csharp/getting-started)
 
 Although you might encounter some issues during the development because the tooling is not stable, .NET Core and ASP.NET Core definitely are the future of .NET. I believe that after the tooling reach RTM and with the release of .NET Core 2.0 and .NET Standard 2.0 (expected in Spring 2017), the adoption rate of .NET Core will increase significantly.
 
