@@ -23,7 +23,9 @@ Wait *"Error occurred while restoring NuGet packages: The operation failed as de
 
 Right click on the solution and then click "Restore Nuget Package" didn't work aslo the same error appeared. Tried to workaroud in VS 2017, no luck.
 
-Then I opened command line and typed "dotnet restore", enter. wow *"C:\Program Files\dotnet\sdk\1.0.0-rc4-004771\NuGet.targets(97,5): error : '1.1.0-preview4-final;1.0.0-msbuild3-final' is not a valid version string. [D:\Projects\SimplCommerce\SimplCommerce.sln]"*
+Then I opened command line and typed "dotnet restore", enter. wow 
+
+*"C:\Program Files\dotnet\sdk\1.0.0-rc4-004771\NuGet.targets(97,5): error : '1.1.0-preview4-final;1.0.0-msbuild3-final' is not a valid version string. [D:\Projects\SimplCommerce\SimplCommerce.sln]"*
 
 Let find this string. It is in the SimplCommerce.WebHost.csproj 
 
@@ -33,7 +35,7 @@ It seem not correct, let remove the "1.1.0-preview4-final;"
 
 All the projects build sucessful. Control + F5 the application run just fine.
 
-Let take a look at what have changed.
+### Let take a look at what have changed.
 
  - All the file project.json, project.lock.json, *.xproj was removed. The global.json is removed also.
  - The SimplCommerce.sln just change a little but and seem not important
@@ -44,7 +46,7 @@ So [SimplCommerce](https://github.com/simplcommerce/SimplCommerce) has been upgr
  - AppVeyor hasn't offically support .NET Core csproj. But you can request to join their beta [here](https://github.com/appveyor/ci/issues/1179)
  - Travis hasn't support also. I have submited the request [https://github.com/travis-ci/travis-ci/issues/7301](https://github.com/travis-ci/travis-ci/issues/7301)
  
- And  below are some useful references:
+ ### And  below are some useful references:
  
  - [https://blogs.msdn.microsoft.com/dotnet/2016/05/23/changes-to-project-json/](https://blogs.msdn.microsoft.com/dotnet/2016/05/23/changes-to-project-json/)
  
