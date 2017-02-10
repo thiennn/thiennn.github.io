@@ -37,17 +37,18 @@ All the projects build sucessful. Control + F5 the application run just fine.
 
 ### Let take a look at what have changed.
 
- - All the file project.json, project.lock.json, *.xproj was removed. The global.json is removed also.
+ - All the file project.json, **.xproj was removed. The global.json is removed also.
+ - The files project.lock.json are renamed and moved here obj\project.assets.json
  - The SimplCommerce.sln just change a little but and seem not important
- - The *csproj look simple and nice
+ - The **csproj look simple and nice
  
 So [SimplCommerce](https://github.com/simplcommerce/SimplCommerce) has been upgraded to use csproj. There are a couple of things I want to note here:
 
  - AppVeyor hasn't offically support .NET Core csproj. But you can request to join their beta [here](https://github.com/appveyor/ci/issues/1179)
  - Travis hasn't support also. I have submited the request [https://github.com/travis-ci/travis-ci/issues/7301](https://github.com/travis-ci/travis-ci/issues/7301)
  
- ### And  below are some useful references:
- 
+### And  below are some useful references:
+
  - [https://blogs.msdn.microsoft.com/dotnet/2016/05/23/changes-to-project-json/](https://blogs.msdn.microsoft.com/dotnet/2016/05/23/changes-to-project-json/)
  
  - [https://blogs.msdn.microsoft.com/dotnet/2017/02/07/announcing-net-core-tools-updates-in-vs-2017-rc/](https://blogs.msdn.microsoft.com/dotnet/2017/02/07/announcing-net-core-tools-updates-in-vs-2017-rc/)
