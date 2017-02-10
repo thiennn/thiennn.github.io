@@ -44,13 +44,12 @@ All the projects build sucessful. Control + F5 the application run just fine.
  
 So [SimplCommerce](https://github.com/simplcommerce/SimplCommerce) has been upgraded to use csproj. There are a couple of things I want to note here:
 
- - AppVeyor hasn't offically support .NET Core csproj. But you can request to join their beta [here](https://github.com/appveyor/ci/issues/1179)
- - Travis hasn't support also. I have submited the request [https://github.com/travis-ci/travis-ci/issues/7301](https://github.com/travis-ci/travis-ci/issues/7301)
+ > AppVeyor hasn't offically support .NET Core csproj. But you can request to join their beta [here](https://github.com/appveyor/ci/issues/1179)
+ > Travis hasn't support also. I have submited the request [https://github.com/travis-ci/travis-ci/issues/7301](https://github.com/travis-ci/travis-ci/issues/7301)
  
 ### And  below are some useful references:
 
- - [https://blogs.msdn.microsoft.com/dotnet/2016/05/23/changes-to-project-json/](https://blogs.msdn.microsoft.com/dotnet/2016/05/23/changes-to-project-json/)
- 
- - [https://blogs.msdn.microsoft.com/dotnet/2017/02/07/announcing-net-core-tools-updates-in-vs-2017-rc/](https://blogs.msdn.microsoft.com/dotnet/2017/02/07/announcing-net-core-tools-updates-in-vs-2017-rc/)
- - [http://www.natemcmaster.com/blog/2017/01/19/project-json-to-csproj/](http://www.natemcmaster.com/blog/2017/01/19/project-json-to-csproj/)
- - [http://www.natemcmaster.com/blog/2017/02/01/project-json-to-csproj-part2/](http://www.natemcmaster.com/blog/2017/02/01/project-json-to-csproj-part2/)
+ - [Changes to Project.json](https://blogs.msdn.microsoft.com/dotnet/2016/05/23/changes-to-project-json/) by Scott Hunter - .NET blog
+ - [Announcing .NET Core Tools Updates in VS 2017 RC](https://blogs.msdn.microsoft.com/dotnet/2017/02/07/announcing-net-core-tools-updates-in-vs-2017-rc/) by Rich Lander - .NET blog
+ - [Project.json to MSBuild conversion guide](http://www.natemcmaster.com/blog/2017/01/19/project-json-to-csproj/) by Nate McMaster
+ - [Part 2 - Caveats of project.json to MSBuild conversion](http://www.natemcmaster.com/blog/2017/02/01/project-json-to-csproj-part2/) by Nate McMaster
