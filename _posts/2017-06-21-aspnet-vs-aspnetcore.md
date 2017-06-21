@@ -3,6 +3,8 @@ layout: post
 title: ASP.NET vs ASP.NET Core
 ---
 
+![ASP.NET Core](/images/aspnetcore.png "ASP.NET Core")
+
 ASP.NET Core is the next generation of ASP.NET. Many people are learning ASP.NET Core, and most of them have already know ASP.NET. So I think it is good to have a summary of the different between them.
 
 |ASP.NET | ASP.NET Core | 
