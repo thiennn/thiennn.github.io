@@ -5,9 +5,9 @@ title: How did I reduce the docker image of SimplCommerce from 900M to 145M usin
 
 ### Introduction
 
-Always looking for better ways to do thing is one of our principles for building <a href="https://github.com/simplcommerce/SimplCommerce" target="_blank">SimplCommerce</a>. Last week, I made another refactoring for our automated docker build by applying multi-stage docker builds. We were able to reduce the SimplCommerce image size from 900M to 145M (compressed). In this blog post, I will describe how we did that.
+Always looking for better ways to do thing is one of our principles for building <a href="https://github.com/simplcommerce/SimplCommerce" target="_blank">SimplCommerce</a>. Last week, I made another refactoring for our automated docker build by applying multi-stage builds. We were able to reduce the SimplCommerce image size from 900M to 145M (compressed). In this blog post, I will describe how we did that.
 
-Let review the situation: We want to run a docker automated build for every change happens on master branch. 
+First, let review the situation: We want to run a docker automated build for every change happens on master branch. 
 
 - [This is our first version](http://thienn.com/dockerizing-real-world-aspnetcore-application-original/)
 - [This is second version](http://thienn.com/dockerizing-real-world-aspnetcore-application/)
@@ -45,9 +45,9 @@ However, The generated sql file is <a href="https://www.postgresql.org/message-i
 
 ### The second stage
 
-The runtime only microsoft/aspnetcore:2.0.0-preview2-jessie image is used as the base. We also need to install postgresql-client in order to execute sql script.
+The runtime only microsoft/aspnetcore:2.0.0-preview2-jessie image is used as the base. We also need to install postgresql-client in order to execute .sql scripts.
 
-I have named the fist stage "build-env" by adding an `AS build-env` to the FROM instruction. We can use that name in the COPY instruction
+I have named the fist stage "build-env" by adding an `AS build-env` to the FROM instruction. We can use that name in the COPY instructions
 
 `RUN chmod 755 /docker-entrypoint.sh` to set execute permission for the docker-entrypoint.sh
 
@@ -57,6 +57,6 @@ When the docker run it will execute the docker-entrypoint.sh which will connect 
 
 ### Note
 
-At this time <a href="https://github.com/docker/hub-feedback/issues/1039" target="_blank">Docker Hub has supported multi-stage builds</a>. Fortunately, Docker Cloud has supported it.
+At this time <a href="https://github.com/docker/hub-feedback/issues/1039" target="_blank">Docker Hub has supported multi-stage builds</a>. Fortunately, Docker Cloud has supported it and it's free also
 
 ![SimplCommcere Docker Cloud](/images/simplcommerce-docker-cloud.png "SimplCommcere Docker Cloud")
