@@ -26,17 +26,17 @@ By applying multi-stages build I have divided the SimplCommerce Dockerfile into 
 
 In the first stage, I use the <a href="https://hub.docker.com/r/simplcommerce/simpl-sdk" target="_blank">simplcommerce/simpl-sdk</a> as a base image. Basically, it is an image contains dotnet core sdk, nodejs and gulp-cli
 
-- Because the SimplCommerce source code is using MSSQL, I run some SED commands (find and replace) to make it work for PostgeSQL.
+Because the SimplCommerce source code is using MSSQL, I run some SED commands (find and replace) to make it work for PostgeSQL.
 
-- Install gulp and run "copy-modules" gulp task to copy all the modules to the host. SimplCommere is built based on <a href="https://www.codeproject.com/Articles/1109475/Modular-Web-Application-with-ASP-NET-Core" target="_blank">modular architecture</a>
+Install gulp and run "copy-modules" gulp task to copy all the modules to the host. SimplCommere is built based on <a href="https://www.codeproject.com/Articles/1109475/Modular-Web-Application-with-ASP-NET-Core" target="_blank">modular architecture</a>
 
-- I also need to delete all added migrations and run add migration again the because the difference between MSSQL and PostgreSQL. 
+I also need to delete all added migrations and run add migration again the because the difference between MSSQL and PostgreSQL. 
 
-- `dotnet ef migrations script -o dbscript.sql` will generage sql script for the database schema. 
+`dotnet ef migrations script -o dbscript.sql` will generage sql script for the database schema. 
 
-- Publish the website.
+Publish the website.
 
-- However, The generated sql file is <a href="https://www.postgresql.org/message-id/201003310441.o2V4fEMm048826@wwwmaster.postgresql.org" target="_blank">utf-8 encoded which having issue when run by psql command</a>.
+However, The generated sql file is <a href="https://www.postgresql.org/message-id/201003310441.o2V4fEMm048826@wwwmaster.postgresql.org" target="_blank">utf-8 encoded which having issue when run by psql command</a>.
 
 > The psql command gives syntax errors when fed .sql files that are saved with
 > encoding "UTF-8" and contain a BOM (byte order marker)
@@ -59,4 +59,4 @@ When the docker run it will execute the docker-entrypoint.sh which will connect 
 
 At this time <a href="https://github.com/docker/hub-feedback/issues/1039" target="_blank">Docker Hub has supported multi-stage builds</a>. Fortunately, Docker Cloud has supported it.
 
-![SimplCommcere  Docker Cloud](/simplcommerce-docker-cloud.png "SimplCommcere  Docker Cloud")
+![SimplCommcere Docker Cloud](/images/simplcommerce-docker-cloud.png "SimplCommcere Docker Cloud")
