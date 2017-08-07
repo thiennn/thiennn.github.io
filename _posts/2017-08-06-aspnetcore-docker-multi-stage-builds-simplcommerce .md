@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How did I reduce the docker image of SimplCommerce from 900M to 145M using docker multi-stage builds
+title: How did I reduce the docker image of SimplCommerce from 900M to 145M using multi-stage builds
 ---
 
 ### Introduction
