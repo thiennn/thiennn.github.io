@@ -57,6 +57,6 @@ When the docker run it will execute the docker-entrypoint.sh which will connect 
 
 ### Note
 
-At this time <a href="https://github.com/docker/hub-feedback/issues/1039" target="_blank">Docker Hub has supported multi-stage builds</a>. Fortunately, Docker Cloud has supported it and it's free also
+At this time <a href="https://github.com/docker/hub-feedback/issues/1039" target="_blank">Docker Hub has NOT supported multi-stage builds</a>. Fortunately, Docker Cloud has supported it and it's free also
 
 ![SimplCommcere Docker Cloud](/images/simplcommerce-docker-cloud.png "SimplCommcere Docker Cloud")
