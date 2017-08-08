@@ -9,8 +9,8 @@ Always looking for better ways to do thing is one of our principles for building
 
 First, let review the situation: We want to run a docker automated build for every change happens on master branch. 
 
-- [This is our first version](http://thienn.com/dockerizing-real-world-aspnetcore-application-original/)
-- [This is second version](http://thienn.com/dockerizing-real-world-aspnetcore-application/)
+- [This is our first version of docker build](http://thienn.com/dockerizing-real-world-aspnetcore-application-original/)
+- [This is our second version docker build](http://thienn.com/dockerizing-real-world-aspnetcore-application/)
 
 One of our problems is that the docker image size is quite big around 900M (compressed). Because it have to include everything so that it can build the application by itself such as dotnet core sdk, nodejs, gulp, and all the source code. 
 
@@ -47,7 +47,7 @@ However, The generated sql file is <a href="https://www.postgresql.org/message-i
 
 The runtime only microsoft/aspnetcore:2.0.0-preview2-jessie image is used as the base. We also need to install postgresql-client in order to execute .sql scripts.
 
-I have named the fist stage "build-env" by adding an `AS build-env` to the FROM instruction. We can use that name in the COPY instructions
+I have named the first stage "build-env" by adding an `AS build-env` to the FROM instruction. So, we can use that name in the COPY instructions
 
 `RUN chmod 755 /docker-entrypoint.sh` to set execute permission for the docker-entrypoint.sh
 
