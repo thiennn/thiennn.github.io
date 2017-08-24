@@ -156,6 +156,11 @@ img {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  
+  @include mobile {
+    margin-bottom: 212px;
+	background-position-x: -768px;
+  }
 }
 
 .masthead {
@@ -187,6 +192,10 @@ img {
 
 .inner-header {
   margin-top: 90px;
+  
+  @include mobile {
+	margin-top: 5px;
+  }
 }
 
 .site-info {
