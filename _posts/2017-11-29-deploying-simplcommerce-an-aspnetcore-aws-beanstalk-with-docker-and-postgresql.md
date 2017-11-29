@@ -1,9 +1,11 @@
 ---
 layout: post
-title: Deploying SimplCommcere, an ASP.NET Core Application to AWS Elastic Beanstalk with Docker
+title: Deploying SimplCommcere, an ASP.NET Core Application to AWS Elastic Beanstalk with Docker and PostgreSQL
 ---
 
 ### Introduction
+
+![SimplCommerce Beanstalk](/images/aspnetcorelove.png)
 
 As a .NET developer, my primary programming language is C# and Azure is the my first choice when thinking of the cloud. Recently, I have joined an interesting project that the customer requested us to use ASP.NET Core with Aurora database and host in AWS. They prefer AWS because they already have several applications there. They also want to optimize the hosting cost and prefer using open sources. Actually they requested us to develop application in PHP, but we have convinced them to use .NET Core. We said to them Microsoft have changed, .NET Core is awesome. It's fully open source and can run very well on Linux, bla. bla... Finally they agreed. :)
 
@@ -66,7 +68,9 @@ By default our container will behind an nginx proxy, and it's configured to acce
 
 In AWS Consone, go to Elastic Beanstalk, create new application. Enter application name and click create. Then create an environment (You can think environment here can be dev, test, staging, production). Choose web server environment, enter environment name. For the Platform select Docker and upload application code. You can package your own "Dockerrun.aws.json" or use the one I have created (here)[https://github.com/simplcommerce/SimplCommerce/blob/master/aws-beanstalk/simplcommerce-eb.zip]. Click on configure more options
 
-In the software block in modify. This is where we will enter the environments which will be read by the container. We need to add the following variable:
+![SimplCommerce Beanstalk](/images/beanstalk1.png)
+
+In the software block click modify. This is where we will enter the environments which will be read by the container. We need to add the following variables:
 
 | Property Name | Property Value |
 |---------------|----------------|
@@ -79,6 +83,15 @@ In the software block in modify. This is where we will enter the environments wh
 The connection string should look like: 
 
 `User ID={};Password={};Host={};Port=5432;Database={};Pooling=true;`
+
+An important note is that you need to configure security for Beanstalk and the PostgreSQL can talk to it other. This sound weird because the PostgreSQL already has publicly accessible.
+
+On the AWS console, go to your PostgreSQL instance and find the security group. In my case it is "rds-launch-wizard". Note that name, then back to your Beanstalk application environment. Click on Configuration then the setting icon in the "Instances" block, add the security group name of PostgreSQL to the "EC2 security groups". Then apply.
+
+![SimplCommerce Beanstalk](/images/beanstalk2.png)
+
+Congratulation! Your website is now up and running.
+
 
 
 
