@@ -3,8 +3,6 @@ layout: post
 title: Deploying SimplCommcere, an ASP.NET Core Application to AWS Elastic Beanstalk with Docker and PostgreSQL
 ---
 
-### Introduction
-
 ![SimplCommerce Beanstalk](/images/aspnetcorelove.png)
 
 As a .NET developer, my primary programming language is C# and Azure is the my first choice when thinking of the cloud. Recently, I have joined an interesting project that the customer requested us to use ASP.NET Core with Aurora database and host in AWS. They prefer AWS because they already have several applications there. They also want to optimize the hosting cost and prefer using open sources. Actually they requested us to develop application in PHP, but we have convinced them to use .NET Core. We said to them Microsoft have changed, .NET Core is awesome. It's fully open source and can run very well on Linux, bla. bla... Finally they agreed. :)
@@ -13,7 +11,7 @@ EC2 was not a preferred option because with EC2 we have to manage the VM: manual
 
 ASP.NET Core run very well on Linux, how can we leverage that. Fortunately, Beanstalk supports deploying from docker containers. Sweet! with Docker containers, we can define our own run time environment. 
 
-AWS Beanstalk with docker is nice. Thinking about SimplCommerce. I think it is great to see SimplCommerce run in AWS and fully on open source stack: ASP.NET Core, PostgreSQL, Linux, Docker. Let get started.
+AWS Beanstalk with docker is nice. Thinking about SimplCommerce. I think it is great to see SimplCommerce run in AWS and fully on open source stack: ASP.NET Core, PostgreSQL, AWS Elastic Beanstalk, Linux, Docker. Let get started. You can also checkout the result at http://simplcommerce-test.gkbf722mcc.us-east-1.elasticbeanstalk.com (Free Tier)
 
 ### First, the docker image
 
@@ -27,7 +25,7 @@ For SimplCommcere we choose PostgreSQL over Aurora or MySQL because I see Postgr
 
 Login to the AWS Console(I am using Free Usage Tier), go to RDS and create a new PostgreSQL database. I choose Dev/Test for the use cases.
 
-In the Specify DB details screen -> Instance specification. Check the option "Only enable option eligible for RDS Fre Usage Tier" and leave other as it is. In the settings section, filling your DB instance identifier (I filled simpldb), master username and password.
+In the Specify DB details screen -> Instance specification. Check the option "Only enable option eligible for RDS Free Usage Tier" and leave other as it is. In the settings section, filling your DB instance identifier (I filled simpldb), master username and password.
 
 In the step 4: Configure advanced settings. Make sure the Public accessibility is Yes. Fill your database name (I filled simpldb) and leave other as default.
 
@@ -86,7 +84,11 @@ The connection string should look like:
 
 An important note is that you need to configure security for Beanstalk and the PostgreSQL can talk to it other. This sound weird because the PostgreSQL already has publicly accessible.
 
-On the AWS console, go to your PostgreSQL instance and find the security group. In my case it is "rds-launch-wizard". Note that name, then back to your Beanstalk application environment. Click on Configuration then the setting icon in the "Instances" block, add the security group name of PostgreSQL to the "EC2 security groups". Then apply.
+On the AWS console, go to your PostgreSQL instance and find the security group. In my case it is "rds-launch-wizard". Note that name, click on it, select Inbound tab, click Edit and add a new rule like the image below
+
+![SimplCommerce Beanstalk](/images/beanstalk3.png)
+
+Then back to your Beanstalk application environment. Click on Configuration then the setting icon in the "Instances" block, add the security group name of PostgreSQL to the "EC2 security groups". Then apply.
 
 ![SimplCommerce Beanstalk](/images/beanstalk2.png)
 
