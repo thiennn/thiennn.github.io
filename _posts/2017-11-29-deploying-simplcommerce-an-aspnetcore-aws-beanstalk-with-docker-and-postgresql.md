@@ -44,22 +44,10 @@ In AWS Console, go to Amazon S3. Create a bucket and make sure that you grant th
 
 ### Step 3: Create AWS Elastic Beanstalk application
 
-What we need is the "Dockerrun.aws.json". Please see it below. 
-```json
-{
- "AWSEBDockerrunVersion": "1",
- "Image": {
-    "Name": "simplcommerce/simplcommerce-eb",
-    "Update": "true"
-  },
- "Ports": [
-   {
-     "ContainerPort": "80"
-   }
- ],
- "Logging": "/var/log"
-}
-```
+What we need is the "Dockerrun.aws.json". Please see it below.
+
+{% gist 305f1cc58e6154bab4b2ace1e9fd8b93 %}
+
 It is quite simple. Where to pull the docker image? In our case is simplcommerce/simplcommerce-eb. It's a publish repository in docker hub, so we don't need to provide a credential for authentication. The container expose port 80. And the log should be written to /var/log folder of the host.
 
 By default our container will behind an nginx proxy, and it's configured to accept request having the size of the body under 2M. I have configured to accept up to 6M.
