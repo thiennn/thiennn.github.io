@@ -52,7 +52,7 @@ It is quite simple. Where to pull the docker image? In our case it is simplcomme
 
 By default our containers will stand behind a nginx proxy, and it's configured to accept request having the size of the body under 2M. But we can configure to accept bigger size.
 
-In AWS Console, go to Elastic Beanstalk, create new application. Enter application name and click create. Then create an environment (You can think environment here can be dev, test, staging, production). Choose web server environment, enter environment name. For the Platform select Docker and upload application code. You can package your own "Dockerrun.aws.json" or just use the one I have created (here)[https://github.com/simplcommerce/SimplCommerce/blob/master/aws-beanstalk/simplcommerce-eb.zip]. Click on configure more options
+In AWS Console, go to Elastic Beanstalk, create new application. Enter application name and click create. Then create an environment (You can think environment here can be dev, test, staging, production). Choose web server environment, enter environment name. For the Platform select Docker and upload application code. You can package your own "Dockerrun.aws.json" or just use the one I have created [here](https://github.com/simplcommerce/SimplCommerce/blob/master/aws-beanstalk/simplcommerce-eb.zip). Click on configure more options
 
 ![SimplCommerce Beanstalk](/images/beanstalk1.png)
 
