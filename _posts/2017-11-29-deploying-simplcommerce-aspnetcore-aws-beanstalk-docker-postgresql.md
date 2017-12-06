@@ -11,7 +11,7 @@ EC2 was not a preferred option because with EC2 we have to manage the VM: manual
 
 ASP.NET Core run very well on Linux, how can we leverage that. Fortunately, Beanstalk supports deploying from docker containers. Sweet! with Docker containers, we can define our own run time environment. 
 
-AWS Beanstalk with docker is nice. Thinking about SimplCommerce. I think it is great to see SimplCommerce run in AWS and fully on open source stack: ASP.NET Core, PostgreSQL, AWS Elastic Beanstalk, Linux, Docker. So, let get started. You can also checkout the result at [http://simplcommerce-test.gkbf722mcc.us-east-1.elasticbeanstalk.com](http://simplcommerce-test.gkbf722mcc.us-east-1.elasticbeanstalk.com) (Free Tier)
+AWS Beanstalk with docker is nice. Thinking about [SimplCommerce](https://github.com/simplcommerce/SimplCommerce). I think it is great to see SimplCommerce run in AWS and fully on open source stack: ASP.NET Core, PostgreSQL, AWS Elastic Beanstalk, Linux, Docker. So, let get started. You can also checkout the result at [http://simplcommerce-test.gkbf722mcc.us-east-1.elasticbeanstalk.com](http://simplcommerce-test.gkbf722mcc.us-east-1.elasticbeanstalk.com) (Free Tier)
 
 ### First, the docker image
 
