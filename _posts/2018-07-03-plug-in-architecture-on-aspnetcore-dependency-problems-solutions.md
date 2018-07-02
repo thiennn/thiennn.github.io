@@ -23,7 +23,14 @@ So how to include only assemblies we need for a plugin? I have found 3 workaroun
 
 The first workaround: turn CopyLocalLockFileAssemblies on and write a custom MSBuild task to delete redundant assemblies such as System.* or Microsoft.AspNetCore.* assemblies. The downside of this workaround is that it is hard to track the list of assemblies need to delete, and the build time is slow.
 
-The second workaround: make some treat in the project file (.csproj) to copy some particular assemblies we need. For example, the case of Stripe. In the project file, in the PropertyGroup section we add a property to store the Stripe version `<StripePackageVersion>11.10.0</StripePackageVersion>`. Then in the ItemGroup we add the following 2 lines
+The second workaround: make some treats in the project file (.csproj) to copy some particular assemblies we need. For example, the case of Stripe. In the project file, in the PropertyGroup section we add a property to store the Stripe version 
+
+```xml
+
+<StripePackageVersion>11.10.0</StripePackageVersion>
+```
+
+Then in the ItemGroup we add the following 2 lines
 
 ```xml
 <PackageReference Include="Stripe.net" Version="$(StripePackageVersion)" />
