@@ -3,7 +3,7 @@ layout: post
 title: Plug-in architecture on ASP.NET Core - Dependency problems and solutions
 ---
 
-Plug-in architecture here I mean that the application’s functionality can be extended or removed by install or uninstall plugins at runtime without the need to re-compile or re-deploy the application. Plugins are stored in a marketplace, users can find them install or uninstall them in the fly, directly in the app. This type of architecture is usually found in CMS, or ecommerce systems. We are also apply it in [SimplCommerce](https://github.com/simplcommerce/SimplCommerce)
+Plug-in architecture here I mean that the application’s functionality can be extended or removed by install or uninstall plugins at runtime without the need to re-compile or re-deploy the application. Plugins are stored in a marketplace, users can find them install or uninstall them on the fly, directly in the app. This type of architecture is usually found in CMS, or ecommerce systems. We are also apply it in [SimplCommerce](https://github.com/simplcommerce/SimplCommerce)
 
 ![Plugin](/images/plugin.png "Plugin")
 > Note: This picture is from the internet
@@ -39,9 +39,9 @@ Then in the ItemGroup we add the following 2 lines
 
 The downside of this workaround is that we must know exactly what assemblies we want to copy and this might difficult if the dependency has other dependencies.
 
-The third workaround is adding project reference during the development time as normally ASP.NET Core application, when development complete, we do dotnet publish on the plugin project. During the publish .NET Core will travel all dependency graph and copies all the dependencies to the output folder. Fortunately, all the assemblies referenced by the Microsoft.AspNetCore.App are not included, because they are installed when you install the ASP.NET Core runtime.
+The third workaround is adding project reference during the development time as normal ASP.NET Core application, when development complete, we do dotnet publish on the plugin project. During the publish .NET Core will travel all dependency graph and copies all the dependencies to the output folder. Fortunately, all the assemblies referenced by the Microsoft.AspNetCore.App are not included, because they are installed when you install the ASP.NET Core runtime.
 
-The last problem we have to resolve is the dependency versions conflicts. Because plugins don’t know each other, they can be developed at different time by different teams. Therefore, some different version of common assemblies can be used. For example, a plugin A use the version 9.3.0 of WindowsAzure.Storage, another plugin B use 9.2.0. When we install both 2 plugins will cause version conflict. The workaround for this is that before installing a plugin, all the dependencies of that plugin must be scanned to check for the potential version conflict.
+The last problem we have to resolve is the dependency versions conflicts. Because plugins don’t know each other, they can be developed at different time by different teams. Therefore, some different version of common assemblies can be used. For example, a plugin A use the version 9.3.0 of WindowsAzure.Storage, another plugin B use 9.2.0 of WindowsAzure.Storage. When we install both 2 plugins will cause version conflict. The workaround for this is that before installing a plugin, all the dependencies of that plugin must be scanned to check for the potential version conflict. If there is a conflict then the system will not allow to install that plugin.
 
 ```csharp
 Assembly assembly;
